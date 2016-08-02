@@ -59,9 +59,7 @@ describe Checkout do
 
     it 'handles totals involving floating point errors' do
       checkout.scan(item001)
-      p checkout.total
       checkout.scan(item003)
-      p checkout.total
       checkout.scan(item001)
 
       expect(checkout.total).to eq 55.8

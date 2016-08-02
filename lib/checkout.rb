@@ -23,7 +23,6 @@ class Checkout
     end
 
     def apply_multibuy
-      p @promotion_rules
       count = @basket.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
       toChange = @basket.select { |v| count[v] >=  @promotion_rules.multibuy_amount && v == @promotion_rules.multibuy_item }[0]
 
