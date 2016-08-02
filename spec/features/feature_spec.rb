@@ -1,8 +1,9 @@
 feature 'User story 1' do
   let(:checkout) {Checkout.new}
-  let(:item001) {Item.new('001', 'Lavender heart', 9.25 )}
-  let(:item002) {Item.new('002', 'Personalised cufflinks', 45.0)}
-  let(:item003) {Item.new('003', 'Kids T-shirt', 19.95 )}
+  let(:item001) { Item.new( {product_code: '001', name: 'Lavender heart', price: 9.25} ) }
+  let(:item002) { Item.new( {product_code: '002', name: 'Personalised cufflinks', price: 45.0} ) }
+  let(:item003) { Item.new( {product_code: '003', name: 'Kids T-shirt', price: 19.95 } ) }
+
   scenario 'find total of basket' do
 
     checkout.scan(item001)

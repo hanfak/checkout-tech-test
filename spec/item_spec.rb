@@ -1,5 +1,5 @@
 describe Item do
-  subject(:item) {described_class.new('001', 'Lavender heart', 9.25)}
+  subject(:item) {described_class.new(product_code: '001', name: 'Lavender heart', price: 9.25)}
 
   describe "#initialize" do
     it "is initialized with a product code" do
