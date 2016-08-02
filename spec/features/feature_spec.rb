@@ -18,7 +18,7 @@ feature 'User story 1' do
 end
 
 feature 'User story 2' do
-  let(:promo_rules) { PromotionRules.new(0.1) }
+  let(:promo_rules) { PromotionRules.new(60.0, 0.1) }
   let(:checkout) {Checkout.new(promo_rules)}
   let(:item001) { Item.new( {product_code: '001', name: 'Lavender heart', price: 9.25} ) }
   let(:item002) { Item.new( {product_code: '002', name: 'Personalised cufflinks', price: 45.0} ) }
