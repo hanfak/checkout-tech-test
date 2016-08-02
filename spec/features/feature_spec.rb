@@ -46,6 +46,7 @@ feature 'User story 3' do
   let(:item001) { Item.new( {product_code: '001',
                             name: 'Lavender heart',
                             price: 9.25} ) }
+  let(:item002) { Item.new( {product_code: '002', name: 'Personalised cufflinks', price: 45.0} ) }
 
   scenario 'give discount when buying multiple discounted item' do
     2.times { checkout.scan(item001) }
@@ -53,5 +54,14 @@ feature 'User story 3' do
     actual_price = checkout.total
 
     expect(actual_price).to eq 17.0
+  end
+
+  scenario 'Apply both discounts' do
+    checkout.scan(item001)
+    checkout.scan(item002)
+    checkout.scan(item001)
+    actual_price = checkout.total
+
+    expect(actual_price).to eq 55.8
   end
 end
