@@ -3,6 +3,7 @@ class Checkout
   def initialize(promotion_rules)
     @total = 0.0
     @promotion_rules = promotion_rules
+    @discount = 0.0
   end
 
   def scan(item)
@@ -10,6 +11,9 @@ class Checkout
   end
 
   def total
-    return @total * (1 - @promotion_rules.total_discount)
+    if @total >= @promotion_rules.total_discount_limit
+      @discount = @promotion_rules.total_discount
+    end
+    @total * (1 - @discount)
   end
 end

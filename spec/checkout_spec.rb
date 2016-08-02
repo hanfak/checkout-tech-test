@@ -35,5 +35,11 @@ describe Checkout do
 
       expect(checkout.total).to eq 71.82
     end
+
+    it 'no discounts when multiple scans less than discount amount' do
+      2.times {checkout.scan(item001)}
+
+      expect(checkout.total).to eq 18.5
+    end
   end
 end
