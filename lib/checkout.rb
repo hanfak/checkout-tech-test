@@ -1,7 +1,8 @@
 class Checkout
 
-  def initialize
+  def initialize(promotion_rules)
     @total = 0.0
+    @promotion_rules = promotion_rules
   end
 
   def scan(item)
