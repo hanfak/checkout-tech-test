@@ -13,3 +13,9 @@ I want to reduce the price of specific product depending on the number bought
 As a seller
 I want to perform multiple discounts
 So that customers will buy more
+
+Extra
+
+As a seller
+To keep the customer happer and confirm their purchases
+I want to produce a receipt with the details of purchases and promotions
