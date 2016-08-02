@@ -10,6 +10,6 @@ class Checkout
   end
 
   def total
-    @total
+    @total > 60.0 ? @total * (1 - @promotion_rules.total_discount) : @total
   end
 end

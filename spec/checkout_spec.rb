@@ -24,4 +24,14 @@ describe Checkout do
       expect(checkout_no_discount.total).to eq 29.2
     end
   end
+
+  describe '#total' do
+    subject(:checkout) {described_class.new(promotion_rules)}
+    let(:promotion_rules) {double(:PromotionRules, total_discount: 0.1)}
+    it 'discounts when above specific total' do
+      4.times {checkout.scan(item002)}
+
+      expect(checkout.total).to eq 71.82
+    end
+  end
 end
