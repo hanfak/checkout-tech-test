@@ -28,7 +28,9 @@ describe Checkout do
 
   describe '#total' do
     subject(:checkout) { described_class.new(promotion_rules) }
-    let(:promotion_rules) { double(:PromotionRules, total_discount: 0.1, total_discount_limit: 60.0) }
+    let(:promotion_rules) { double(:PromotionRules, total_discount: 0.1, total_discount_limit: 60.0,
+    multibuy_item: item001,
+    multibuy_price: 8.5 ) }
 
     it 'discounts when above specific total' do
       4.times {checkout.scan(item002)}
@@ -37,9 +39,21 @@ describe Checkout do
     end
 
     it 'no discounts when multiple scans less than discount amount' do
+      2.times {checkout.scan(item002)}
+
+      expect(checkout.total).to eq 39.9
+    end
+
+    it 'multi buy discounts when 2 scans less than discount amount' do
       2.times {checkout.scan(item001)}
 
-      expect(checkout.total).to eq 18.5
+      expect(checkout.total).to eq 17.0
+    end
+
+    it 'multi buy discounts when multiple scans less than discount amount' do
+      5.times {checkout.scan(item001)}
+
+      expect(checkout.total).to eq 42.5
     end
   end
 end

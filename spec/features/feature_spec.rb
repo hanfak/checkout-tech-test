@@ -35,3 +35,23 @@ feature 'User story 2' do
   end
 
 end
+
+feature 'User story 3' do
+  let(:promo_rules) { PromotionRules.new( {
+      total_discount_limit: 60.0,
+      total_discount: 0.1,
+      multibuy_item: item001,
+      multibuy_price: 8.5 } ) }
+  let(:checkout) {Checkout.new(promo_rules)}
+  let(:item001) { Item.new( {product_code: '001',
+                            name: 'Lavender heart',
+                            price: 9.25} ) }
+
+  scenario 'give discount when buying multiple discounted item' do
+    2.times { checkout.scan(item001) }
+
+    actual_price = checkout.total
+
+    expect(actual_price).to eq 17.0
+  end
+end
