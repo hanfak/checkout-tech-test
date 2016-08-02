@@ -5,9 +5,9 @@ feature 'User story 1' do
   let(:item003) {Item.new('003', 'Kids T-shirt', 19.95 )}
   scenario 'find total of basket' do
 
-    checkout.scan(item1)
-    checkout.scan(item2)
-    checkout.scan(item3)
+    checkout.scan(item001)
+    checkout.scan(item002)
+    checkout.scan(item003)
 
     actual_price = checkout.total
 

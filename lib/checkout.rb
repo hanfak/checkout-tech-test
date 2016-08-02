@@ -1,10 +1,14 @@
 class Checkout
 
+  def initialize
+    @total = 0.0
+  end
+
   def scan(item)
-    @total = item.price
+    @total += item.price
   end
 
   def total
-    @total || 0.0
+    @total
   end
 end
