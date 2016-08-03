@@ -20,6 +20,7 @@ end
 feature 'User story 2' do
   let(:promo_rules) { PromotionRules.new({total_discount_limit: 60.0, total_discount: 0.1}) }
   let(:checkout) {Checkout.new(promo_rules)}
+
   let(:item001) { Item.new( {product_code: '001', name: 'Lavender heart', price: 9.25} ) }
   let(:item002) { Item.new( {product_code: '002', name: 'Personalised cufflinks', price: 45.0} ) }
   let(:item003) { Item.new( {product_code: '003', name: 'Kids T-shirt', price: 19.95 } ) }
@@ -43,6 +44,7 @@ feature 'User story 3' do
                         multibuy_item: item001,
                         multibuy_price: 8.5} ) }
   let(:checkout) {Checkout.new(promo_rules)}
+
   let(:item001) { Item.new( {product_code: '001',
                             name: 'Lavender heart',
                             price: 9.25} ) }

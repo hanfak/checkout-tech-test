@@ -9,6 +9,9 @@ describe Checkout do
   let(:item002) {double(:item, product_code: '002', name: 'Kids T-shirt', price: 19.95)}
   let(:item003) { double(:item, product_code: '003', name: 'Personalised cufflinks', price: 45.0) }
 
+  # let(:basket) {double(:basket, apply_multibuy: 'discounted', add: 'added') }
+
+
   describe 'defaults' do
     it 'has 0 balance' do
       expect(checkout_no_discount.total).to eq 0.0
@@ -28,6 +31,11 @@ describe Checkout do
 
       expect(checkout_no_discount.total).to eq 29.2
     end
+
+    # it 'stores an item' do
+    #   expect(basket).to receive(:add)
+    #   checkout_no_discount.scan(item001)
+    # end
   end
 
   describe '#total' do
@@ -37,11 +45,18 @@ describe Checkout do
                                   multibuy_item: item001,
                                   multibuy_price: 8.5, multibuy_amount: 2 ) }
 
+
     it 'discounts when above specific total' do
       4.times {checkout.scan(item002)}
 
       expect(checkout.total).to eq 71.82
     end
+
+    # it 'calls method to process discount if applicable' do
+    #   checkout.scan(item001)
+    #   expect(basket).to receive(:apply_multibuy)
+    #   checkout.total
+    # end
 
     it 'no discounts when multiple scans less than discount amount' do
       2.times {checkout.scan(item002)}
