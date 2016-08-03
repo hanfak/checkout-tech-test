@@ -1,6 +1,5 @@
 class Checkout
   def initialize(promotion_rules)
-    @total = 0.0
     @promotion_rules = promotion_rules
     @basket = []
   end

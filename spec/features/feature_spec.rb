@@ -38,10 +38,10 @@ end
 
 feature 'User story 3' do
   let(:promo_rules) { PromotionRules.new( {
-      total_discount_limit: 60.0,
-      total_discount: 0.1,
-      multibuy_item: item001,
-      multibuy_price: 8.5 } ) }
+                        total_discount_limit: 60.0,
+                        total_discount: 0.1,
+                        multibuy_item: item001,
+                        multibuy_price: 8.5} ) }
   let(:checkout) {Checkout.new(promo_rules)}
   let(:item001) { Item.new( {product_code: '001',
                             name: 'Lavender heart',
