@@ -1,5 +1,4 @@
 class Checkout
-
   def initialize(promotion_rules)
     @total = 0.0
     @promotion_rules = promotion_rules
@@ -11,26 +10,32 @@ class Checkout
   end
 
   def total
-    apply_multibuy
-    total = @basket.inject(0.0) {|sum, item| sum += item.price}
-    discount = discount_amount(total) || 0.0
-    (total * (1 - discount)).round(2)
+    apply_multibuy(promotion_rules.multibuy_item)
+    subTotal = @basket.inject(0.0) { |sum, item| sum += item.price }
+    (subTotal * discount_amount(subTotal)).round(2)
   end
 
   private
+    attr_reader :promotion_rules
+
     def discount_amount(total)
-      @promotion_rules.total_discount if total >= @promotion_rules.total_discount_limit
+      total >= promotion_rules.total_discount_limit ? (1.0 - promotion_rules.total_discount) : 1.0
     end
 
-    def apply_multibuy
-      count = @basket.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
-      toChange = @basket.select { |v| count[v] >=  @promotion_rules.multibuy_amount && v == @promotion_rules.multibuy_item }[0]
+    def apply_multibuy(item)
+      change_price_of_multibuy_items(item) if match_multibuy_criteria(item)
+    end
 
-      @basket.map! do |ele|
-        if ele == toChange
-          ele = Item.new({product_code:                                   toChange.product_code,                           name: toChange.name,                           price:                             @promotion_rules.multibuy_price })
+    def match_multibuy_criteria(item)
+      @basket.include?(item) && @basket.count(item) >=  promotion_rules.multibuy_amount
+    end
+
+    def change_price_of_multibuy_items(item)
+      @basket.map! do |item_to_buy|
+        if item_to_buy == item
+          item_to_buy = Item.new({ product_code: item.product_code, name: item.name, price: promotion_rules.multibuy_price })
         else
-          ele
+          item_to_buy
         end
       end
     end

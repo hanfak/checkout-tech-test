@@ -3,10 +3,9 @@ class PromotionRules
 
   def initialize( options = {})
     @total_discount_limit = options[:total_discount_limit] || 0.0
-    @total_discount = options[:total_discount]
+    @total_discount = options[:total_discount] || 0.0
     @multibuy_item = options[:multibuy_item] || nil
     @multibuy_price = options[:multibuy_price] || 0.0
-
     @multibuy_amount = options[:multibuy_amount] || 2
   end
 

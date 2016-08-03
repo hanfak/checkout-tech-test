@@ -1,11 +1,11 @@
 describe PromotionRules do
-  subject(:promotion_rules) {described_class.new}
-  subject(:promotion_rules_discount) {described_class.new( {total_discount_limit: 60.0, total_discount: 0.1, multibuy_item: item001, multibuy_price: 8.5 } )}
-  subject(:promotion_rules_no_limit) {described_class.new( {total_discount: 0.1} )}
+  subject(:promotion_rules_discount) { described_class.new( { total_discount_limit: 60.0, total_discount: 0.1, multibuy_item: item001, multibuy_price: 8.5 } )}
 
   let(:item001) {double(:item, product_code: '001', name:  'Lavender heart', price: 9.25)}
 
   describe 'defaults' do
+    subject(:promotion_rules) { described_class.new }
+
     it 'has no discount' do
       expect(promotion_rules.total_discount).to eq 0.0
     end
@@ -24,7 +24,8 @@ describe PromotionRules do
   end
 
   describe '#total_discount' do
-    subject(:promotion_rules_negative_limit) {described_class.new( {total_discount: 0.1, total_discount_limit: - 60.0 } )}
+    subject(:promotion_rules_no_limit) { described_class.new( {total_discount: 0.1} )}
+    subject(:promotion_rules_negative_limit) { described_class.new( {total_discount: 0.1, total_discount_limit: - 60.0 } )}
 
     it 'instantiated with discount amount' do
       expect(promotion_rules_discount.total_discount).to eq 0.1
